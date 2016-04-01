@@ -12,6 +12,7 @@ class Modal extends React.Component {
     const {
       header,
       children,
+      showFooter,
       fixedFooter,
       bottomSheet,
       ...props
@@ -23,15 +24,22 @@ class Modal extends React.Component {
       'bottom-sheet': bottomSheet
     });
 
+    let footer = '';
+    if (showFooter) {
+      footer = (
+        <div className="modal-footer">
+          <Button waves='light' modal='close' flat>Close</Button>
+        </div>
+      );
+    }
+
     return (
       <div className={classes} {...props}>
         <div className="modal-content">
           <h4>{header}</h4>
           {children}
         </div>
-        <div className="modal-footer">
-          <Button waves='light' modal='close' flat>Close</Button>
-        </div>
+        {footer}
       </div>
     );
   }
@@ -76,7 +84,8 @@ Modal.propTypes = {
 
 Modal.defaultProps = {
   fixedFooter: false,
-  bottomSheet: false
+  bottomSheet: false,
+  showFooter: true
 };
 
 export default Modal;
